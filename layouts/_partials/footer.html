@@ -1,0 +1,7 @@
+<footer>
+  <p>No affiliation with São Tomé and Príncipe.</p>
+  {{ with site.Params.lastcommit }}
+  {{ $t := time.AsTime . }}
+  <p class="updated">Last updated <time datetime="{{ $t.Format "2006-01-02" }}">{{ $t.Format "2 January 2006" }}</time></p>
+  {{ end }}
+</footer>

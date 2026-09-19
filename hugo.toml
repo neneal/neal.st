@@ -1,0 +1,50 @@
+baseURL = 'https://neal.st/'
+locale = 'en-ca'
+title = 'neal.st - Nazare Neal'
+enableRobotsTXT = false
+disableKinds = ['taxonomy', 'term']
+
+[params]
+  author = 'Nazare Neal'
+  tagline = 'My personal website. If you want, disable scripts and relax.'
+  description = "Nazare Neal's personal website"
+  photo_caption = 'Some green hills that I found bucolic'
+
+[params.sign]
+  prefix = 'rue'
+  name = 'Neal'
+  suffix = 'St'
+
+[[params.links]]
+  label = 'Location'
+  text = 'San Francisco Bay Area'
+
+[[params.links]]
+  label = 'Email'
+  user = 'nazare'
+  decoy = '@spam-trap.invalid'
+  domain = 'neal.st'
+
+[[params.links]]
+  label = 'GitHub'
+  text = 'github.com/neneal'
+  url = 'https://github.com/neneal'
+  external = true
+
+[[params.links]]
+  label = 'LinkedIn'
+  text = 'linkedin.com/in/nazareneal'
+  url = 'https://linkedin.com/in/nazareneal'
+  external = true
+
+[markup.goldmark.renderer]
+  unsafe = false
+
+[security]
+  [security.exec]
+    allow = []
+    osEnv = []
+  [security.funcs]
+    getenv = ['^HUGO_', '^CI$']
+  [security.http]
+    urls = []

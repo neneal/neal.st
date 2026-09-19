@@ -1,0 +1,54 @@
+{{ define "main" }}
+<main>
+  {{ with site.Params.sign }}
+  <p class="sign"><span class="blade"><span class="affix prefix">{{ .prefix }}</span><span class="name">{{ .name }}</span><span class="affix suffix">{{ .suffix }}</span></span></p>
+  {{ end }}
+  <h1>{{ site.Params.author }}</h1>
+  <p class="tagline">{{ site.Params.tagline }}</p>
+
+  {{ .Content }}
+
+  {{ with resources.Get "img/bucolic.jpg" }}
+  {{ $small := .Resize "700x webp q82" }}
+  {{ $large := .Resize "1400x webp q80" }}
+  <figure class="photo">
+    <img src="{{ $small.RelPermalink }}"
+         srcset="{{ $small.RelPermalink }} 700w, {{ $large.RelPermalink }} 1400w"
+         sizes="(max-width: 37rem) 100vw, 34rem"
+         width="{{ $small.Width }}" height="{{ $small.Height }}"
+         alt="Rolling green hills under a blue sky with thin clouds, photographed at the Sonoma County spot where the Windows XP Bliss wallpaper was taken."
+         loading="lazy" decoding="async">
+    <figcaption>{{ site.Params.photo_caption }}</figcaption>
+  </figure>
+  {{ end }}
+
+  <h2>Contact</h2>
+  <dl class="contact">
+    {{ range site.Params.links }}
+    <dt>{{ .label }}</dt>
+    <dd>
+      {{- if .url -}}
+      <a href="{{ .url }}"{{ if .external }} rel="me noopener"{{ end }}>{{ .text }}</a>
+      {{- else if .user -}}
+      <span class="email">{{ .user }}<span class="decoy">{{ .decoy }}</span>@{{ .domain }}</span>
+      {{- else -}}
+      {{ .text }}
+      {{- end -}}
+    </dd>
+    {{ end }}
+  </dl>
+
+  {{ with where site.RegularPages "Section" "posts" }}
+  <h2>Writing</h2>
+  <ul class="posts">
+    {{ range first 10 . }}
+    <li>
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </li>
+    {{ end }}
+  </ul>
+  {{ if gt (len .) 10 }}<p><a href="{{ "/posts/" | relURL }}">All writing</a></p>{{ end }}
+  {{ end }}
+</main>
+{{ end }}

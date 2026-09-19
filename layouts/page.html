@@ -1,0 +1,10 @@
+{{ define "main" }}
+<main>
+  <article>
+    <h1>{{ .Title }}</h1>
+    {{ with .Date }}<p class="post-meta"><time datetime="{{ .Format "2006-01-02" }}">{{ .Format "January 2, 2006" }}</time></p>{{ end }}
+    {{ .Content }}
+  </article>
+  <p class="back"><a href="{{ "/" | relURL }}">← {{ site.Params.author }}</a></p>
+</main>
+{{ end }}
